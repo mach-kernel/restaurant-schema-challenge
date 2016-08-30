@@ -49,3 +49,6 @@ gem 'guard', '2.14.0'
 gem 'rubocop', '0.42.0'
 gem 'guard-rspec', '4.7.3'
 gem 'guard-rubocop', '1.2.0'
+
+gem 'mongoid', '5.1.4'
+gem 'bson', '4.1.1'
