@@ -1,3 +1,5 @@
+services:
+  - mongodb
 deployment:
   automerge:
     owner: mach-kernel
