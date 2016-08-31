@@ -4,4 +4,15 @@ class MenuItem
   include Mongoid::Timestamps
 
   field :name, type: String
+
+  belongs_to :brand
+  has_many :price_levels do
+    def retrieve_pricing(order_type, day_part = nil)
+      query = {
+        order_type: order_type,
+        day_part: day_part
+      }.select! { |_k, v| v.present? }
+      where(query).first
+    end
+  end
 end
