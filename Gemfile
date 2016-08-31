@@ -52,3 +52,5 @@ gem 'guard-rubocop', '1.2.0'
 
 gem 'mongoid', '5.1.4'
 gem 'bson', '4.1.1'
+
+gem 'foreman', '0.82.0'
