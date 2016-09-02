@@ -5,5 +5,5 @@ class Brand
 
   field :name, type: String
 
-  %i(locations menu_items).each { |m| has_many m }
+  %i(locations menu_items).each { |m| has_many m, dependent: :destroy }
 end
