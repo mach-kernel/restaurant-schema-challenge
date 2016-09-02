@@ -46,3 +46,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def extract_self(response)
+  response['links'].select { |x| x['rel'] == 'self' }.first
+end
