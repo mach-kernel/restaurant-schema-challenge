@@ -56,3 +56,7 @@ gem 'bson', '4.1.1'
 gem 'foreman', '0.82.0'
 
 gem 'codeclimate-test-reporter', '0.6.0'
+gem 'grape', '0.17.0'
+gem 'roar', '1.0.4'
+gem 'grape-roar', '0.3.0'
+gem 'hashie-forbidden_attributes', '0.1.1'
