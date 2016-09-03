@@ -37,6 +37,10 @@ module API
           present(find_or_raise(::Brand, (declared(params)[:id])), with: Entities::Brand)
         end
       end
+
+      get do 
+        present ::Brand.all, with: Entities::List
+      end
    end
   end
 end

@@ -7,7 +7,7 @@ describe 'CRUD Brand Resource', type: :request do
       expect(response.code).to eql '201'
       parsed_response = JSON.parse(response.body)
       expect do
-        Brand.find(extract_self(parsed_response)['href'].split('/').last)
+        Brand.find(extract_rel(parsed_response)['href'].split('/').last)
       end.to_not raise_error
     end
 
@@ -34,20 +34,30 @@ describe 'CRUD Brand Resource', type: :request do
   end
 
   context 'retrieve' do
-    let!(:brand) { Brand.create(name: 'proxyfactorybean consultants') }
+    let!(:brands) do
+      (0..9).to_a.map { |x| Brand.create(name: "Brand #{x}") } 
+    end
 
     let!(:location) do
       Location.create(
         name: 'running out of wit',
-        brand: brand,
+        brand: brands.first,
         order_types: [OrderType.create(name: 'less wit here too')]
       )
     end
 
     it 'retrieves the brand with sideloaded resources if present' do
-      get "/v1/brand/#{brand.id}"
+      get "/v1/brand/#{brands.first.id}"
       expect(response.code).to eql '200'
       expect(JSON.parse(response.body)['locations'].count).to eql 1
+    end
+
+    it 'retrieves all brands when no ID is provided' do
+      get '/v1/brand/'
+      expect(response.code).to eql '200'
+      expect(
+        extract_rel(JSON.parse(response.body), 'resources')['href'].count
+      ).to eql 10
     end
   end
 end

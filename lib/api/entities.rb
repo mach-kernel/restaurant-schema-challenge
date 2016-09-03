@@ -3,9 +3,13 @@ module API
   module Entities
     extend ActiveSupport::Autoload
     autoload :Brand
+    autoload :Location
+    autoload :List
 
-    def self.format_link(opts, represented, klass)
+    def self.format_link(opts, represented, klass, return_raw_url = false)
       request_url = Grape::Request.new(opts[:env]).url
+      return request_url if return_raw_url
+      
       resource_path = request_url
         .match(/(\/[a-z]*)$|(\/[a-z]*\/[a-z0-9]*)$/)
         .captures
@@ -21,7 +25,7 @@ module API
 
       # If the resource class is at the end of the URL, append the
       # represented's ID if we have it (e.g on a PUT)
-      if (/#{klass.downcase}$/ =~ request_url) && represented.id.present?
+      if (/#{klass.downcase}$/ =~ request_url) && represented.try(:id).present?
         "#{request_url}/#{represented.id}"
       else
         request_url
