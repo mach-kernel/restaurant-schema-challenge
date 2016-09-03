@@ -45,4 +45,11 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  require 'database_cleaner'
+  DatabaseCleaner.strategy = :truncation
+  config.before { DatabaseCleaner.clean }
+end
+
+def extract_rel(response, rel = nil)
+  response['links'].select { |x| x['rel'] == (rel || 'self') }.first
 end

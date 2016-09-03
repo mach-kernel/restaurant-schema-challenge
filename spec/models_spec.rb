@@ -64,7 +64,7 @@ describe 'document relationships' do
     end
   end
 
-  context 'cascading deletions' do 
+  context 'cascading deletions' do
     let(:error_class) { Mongoid::Errors::DocumentNotFound }
     context 'menu items' do
       let!(:pricing_id) do
@@ -76,8 +76,8 @@ describe 'document relationships' do
       end
 
       it 'removes pricings with menu items' do
-        menu_items.last.destroy!  
-        expect{PriceLevel.find(pricing_id)}.to raise_error(error_class)
+        menu_items.last.destroy!
+        expect { PriceLevel.find(pricing_id) }.to raise_error(error_class)
       end
     end
 
@@ -99,8 +99,12 @@ describe 'document relationships' do
 
     context 'brands' do
       let!(:brand) { Brand.create(name: 'ultra cool brand') }
-      let!(:location_id) { Location.create(name: 'some location', brand: brand)}
-      let!(:menu_item_id) { MenuItem.create(name: 'expensive leaf', brand: brand)}
+      let!(:location_id) do
+        Location.create(name: 'some location', brand: brand)
+      end
+      let!(:menu_item_id) do
+        MenuItem.create(name: 'expensive leaf', brand: brand)
+      end
 
       it 'removes locations and menu items' do
         brand.destroy!
