@@ -7,7 +7,7 @@ module API
       include Grape::Roar::Representer
 
       link :self do |opts|
-        Entities.format_link(opts, nil, nil, true)
+        Entities.request_url(opts[:env])
       end
 
       link :resources do |opts|
