@@ -3,6 +3,7 @@ module API
   module Resources
     class Brand < Grape::API
       extend Helpers::Brand
+      helpers Helpers::Query
 
       desc 'Create a brand'
       brand_params
@@ -14,27 +15,28 @@ module API
         )
       end
 
-      desc 'Update a brand'
       brand_params
       route_param :id do
+        desc 'Update a brand'
         put do
           declared_params = declared(params)
-          brand = begin
-            ::Brand.find(declared_params.delete(:id))
-          rescue Mongoid::Errors::DocumentNotFound
-            error!('Brand not found', 404)
-          end
-
+          brand = find_or_raise(::Brand, declared_params.delete(:id))
           brand.assign_attributes(declared_params)
+
           code = if brand.changed?
-            brand.save
-            204
-          else
-            304
-          end
+                   brand.save
+                   204
+                 else
+                   304
+                 end
           status(code)
         end
+
+        desc 'Get a brand'
+        get do
+          present(find_or_raise(::Brand, (declared(params)[:id])), with: Entities::Brand)
+        end
       end
-    end
+   end
   end
 end

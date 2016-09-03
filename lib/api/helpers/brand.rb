@@ -4,7 +4,7 @@ module API
     module Brand
       def brand_params
         params do
-          requires :name, type: String, desc: 'Brand name'
+          optional :name, type: String, desc: 'Brand name'
           optional :id, type: String, desc: 'Brand ID'
         end
       end

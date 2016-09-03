@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module API
   module Entities
-    module Brand
+    module Location
       include Roar::JSON
       include Roar::Hypermedia
       include Grape::Roar::Representer
@@ -11,8 +11,6 @@ module API
       link :self do |opts|
         Entities.format_link(opts, represented, self.class.name)
       end
-
-      collection :locations, extend: Entities::Location
     end
   end
 end
