@@ -47,6 +47,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-def extract_self(response)
-  response['links'].select { |x| x['rel'] == 'self' }.first
+def extract_self(response, rel = nil)
+  response['links'].select { |x| x['rel'] == rel || 'self' }.first
 end

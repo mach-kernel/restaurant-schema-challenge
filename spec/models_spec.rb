@@ -99,8 +99,12 @@ describe 'document relationships' do
 
     context 'brands' do
       let!(:brand) { Brand.create(name: 'ultra cool brand') }
-      let!(:location_id) { Location.create(name: 'some location', brand: brand) }
-      let!(:menu_item_id) { MenuItem.create(name: 'expensive leaf', brand: brand) }
+      let!(:location_id) do
+        Location.create(name: 'some location', brand: brand)
+      end
+      let!(:menu_item_id) do
+        MenuItem.create(name: 'expensive leaf', brand: brand)
+      end
 
       it 'removes locations and menu items' do
         brand.destroy!
