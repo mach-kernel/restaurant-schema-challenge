@@ -3,5 +3,6 @@ module API
   module Resources
     extend ActiveSupport::Autoload
     autoload :Brand
+    autoload :Location
   end
 end

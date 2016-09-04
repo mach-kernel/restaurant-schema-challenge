@@ -35,7 +35,7 @@ describe 'CRUD Brand Resource', type: :request do
 
   context 'retrieve' do
     let!(:brands) do
-      (0..9).to_a.map { |x| Brand.create(name: "Brand #{x}") } 
+      (0..9).to_a.map { |x| Brand.create(name: "Brand #{x}") }
     end
 
     let!(:location) do

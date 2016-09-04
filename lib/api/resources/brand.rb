@@ -34,13 +34,16 @@ module API
 
         desc 'Get a brand'
         get do
-          present(find_or_raise(::Brand, (declared(params)[:id])), with: Entities::Brand)
+          present(
+            find_or_raise(::Brand, (declared(params)[:id])),
+            with: Entities::Brand
+          )
         end
       end
 
-      get do 
+      get do
         present ::Brand.all, with: Entities::List
       end
-   end
+    end
   end
 end
