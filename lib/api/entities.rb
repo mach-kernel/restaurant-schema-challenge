@@ -5,6 +5,7 @@ module API
     autoload :Brand
     autoload :Location
     autoload :List
+    autoload :OrderType
 
     def self.path_klass(url)
       url.match(%r{(\/[a-z]*)$|(\/[a-z]*\/[a-z0-9]*)$})
