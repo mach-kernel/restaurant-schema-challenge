@@ -3,12 +3,13 @@ module API
   module Entities
     extend ActiveSupport::Autoload
     autoload :Brand
-    autoload :Location
+    autoload :DayPart
     autoload :List
+    autoload :Location
     autoload :OrderType
 
     def self.path_klass(url)
-      url.match(%r{(\/[a-z]*)$|(\/[a-z]*\/[a-z0-9]*)$})
+      url.match(%r{(\/[a-z_]*)$|(\/[a-z_]*\/[a-z0-9]*)$})
          .captures
          .select(&:present?)
          .first

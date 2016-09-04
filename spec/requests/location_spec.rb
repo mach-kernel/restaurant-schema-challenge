@@ -52,7 +52,7 @@ describe 'CRUD Location Resource', type: :request do
       ::OrderType.create(name: 'carrier pigeon', location: locations.first)
     end
 
-    let!(:day_part) do 
+    let!(:day_part) do
       ::DayPart.create(name: 'post brunch brunch', location: locations.first)
     end
 
