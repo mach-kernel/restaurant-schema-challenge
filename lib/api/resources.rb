@@ -4,5 +4,6 @@ module API
     extend ActiveSupport::Autoload
     autoload :Brand
     autoload :Location
+    autoload :OrderType
   end
 end

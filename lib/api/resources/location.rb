@@ -25,11 +25,11 @@ module API
         desc 'Update a location'
         put do
           declared_params = declared(params).compact
-          brand = find_or_raise(::Location, declared_params.delete('id'))
-          brand.assign_attributes(declared_params)
+          location = find_or_raise(::Location, declared_params.delete('id'))
+          location.assign_attributes(declared_params)
 
-          code = if brand.changed?
-                   brand.save
+          code = if location.changed?
+                   location.save
                    204
                  else
                    304
@@ -37,7 +37,7 @@ module API
           status(code)
         end
 
-        desc 'Get a brand'
+        desc 'Get a location'
         get do
           present(
             find_or_raise(::Location, (declared(params)[:id])),
