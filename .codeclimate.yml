@@ -1,0 +1,7 @@
+# Disable duplication in endpoint class includes
+# (kind of silly to throw for this?)
+engines:
+  duplication:
+    enabled: true
+    exclude_fingerprints:
+    - 9221ba6d6f545a6f86a0ecdbfb9ef43b
