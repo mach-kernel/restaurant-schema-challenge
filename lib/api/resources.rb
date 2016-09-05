@@ -6,5 +6,6 @@ module API
     autoload :DayPart
     autoload :Location
     autoload :OrderType
+    autoload :MenuItem
   end
 end

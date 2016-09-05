@@ -22,7 +22,7 @@ module API
 
       order_type_params
       route_param :id do
-        desc 'Update a location'
+        desc 'Update an order type'
         put do
           declared_params = declared(params).compact
           order_type = find_or_raise(::OrderType, declared_params.delete('id'))
