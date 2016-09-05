@@ -2,11 +2,7 @@
 module API
   module Entities
     module Location
-      include Roar::JSON
-      include Roar::Hypermedia
-      include Grape::Roar::Representer
-
-      property :name
+      include Base
 
       link :self do |opts|
         Entities.format_link(opts, represented, self.class.name)
