@@ -2,7 +2,7 @@
 module API
   module Resources
     class DayPart < Grape::API
-      extend Helpers::DayPart
+      include Helpers::Params
       helpers Helpers::Query
 
       desc 'Create a day part'

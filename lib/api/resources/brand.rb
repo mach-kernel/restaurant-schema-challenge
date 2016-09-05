@@ -2,7 +2,7 @@
 module API
   module Resources
     class Brand < Grape::API
-      extend Helpers::Brand
+      include Helpers::Params
       helpers Helpers::Query
 
       desc 'Create a brand'

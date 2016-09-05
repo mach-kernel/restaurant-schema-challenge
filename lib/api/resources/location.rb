@@ -2,7 +2,7 @@
 module API
   module Resources
     class Location < Grape::API
-      extend Helpers::Location
+      include Helpers::Params
       helpers Helpers::Query
 
       desc 'Create a brand'

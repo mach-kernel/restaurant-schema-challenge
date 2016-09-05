@@ -2,9 +2,7 @@
 module API
   module Helpers
     extend ActiveSupport::Autoload
-    autoload :Brand
-    autoload :Location
-    autoload :OrderType
+    autoload :Params
     autoload :Query
   end
 end
