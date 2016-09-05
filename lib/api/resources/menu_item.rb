@@ -2,7 +2,7 @@
 module API
   module Resources
     class MenuItem < Grape::API
-      extend Helpers::MenuItem
+      include Helpers::Params
       helpers Helpers::Query
 
       desc 'Create a menu item'
