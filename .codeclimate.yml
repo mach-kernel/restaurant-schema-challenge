@@ -4,4 +4,4 @@ engines:
   duplication:
     enabled: true
     exclude_fingerprints:
-    - 9221ba6d6f545a6f86a0ecdbfb9ef43b
+    - 8b69549c787b464b16d6c7a6207adf59
