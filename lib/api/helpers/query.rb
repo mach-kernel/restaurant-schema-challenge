@@ -10,7 +10,7 @@ module API
 
       def create_or_raise(klass, fields = {}, *_args)
         klass.create(fields)
-      rescue Mongo::Error::OperationFailure
+      rescue Mongo::Error::OperationFailure, Mongoid::Errors::UnknownAttribute
         error!("Cannot create #{klass.name}, invalid parameters", 400)
       end
     end
