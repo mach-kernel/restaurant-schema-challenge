@@ -7,7 +7,8 @@ module API
     mount Resources::Brand => '/brand'
     mount Resources::DayPart => '/day_part'
     mount Resources::Location => '/location'
-    mount Resources::OrderType => '/order_type'
     mount Resources::MenuItem => '/menu_item'
+    mount Resources::OrderType => '/order_type'
+    mount Resources::PriceLevel => '/price_level'
   end
 end
