@@ -53,6 +53,12 @@ describe 'document relationships' do
       expect(retrieved_pricing.order_type).to eql(
         locations.first.order_types.last
       )
+
+      expect(retrieved_pricing.name)
+        .to eql(
+          "Price for #{menu_items.last.name}, "\
+          "#{partial_pricing.order_type.name}"
+        )
     end
 
     it 'prices correctly for location + order type + day part' do

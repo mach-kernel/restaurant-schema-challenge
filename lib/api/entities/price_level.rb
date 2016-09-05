@@ -4,9 +4,11 @@ module API
     module PriceLevel
       include Base
 
-      property :order_type
-      property :menu_item
-      property :day_part
+      %i(order_type menu_item day_part).each do |sideload|
+        link sideload do |opts|
+          Entities.format_link(opts, represented, sideload.to_s.classify)
+        end
+      end
     end
   end
 end

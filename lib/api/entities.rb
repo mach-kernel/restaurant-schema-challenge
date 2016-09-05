@@ -22,16 +22,16 @@ module API
     def self.format_link(opts, represented, klass)
       req_url = request_url(opts[:env])
       resource_path = path_klass(req_url)
+      klass = klass.underscore.downcase
 
       # If we 'sideload' an entity we can't use this 'request url'
       # 'hack' to generate the link for self
-      unless resource_path.include?(klass.downcase)
-        req_url = "#{req_url.split(resource_path).first}/#{klass.downcase}"
-      end
+      req_url = "#{req_url.split(resource_path).first}/#{klass}" unless
+        resource_path.include?(klass)
 
       # If the resource class is at the end of the URL, append the
       # represented's ID if we have it (e.g on a PUT)
-      if (/#{klass.downcase}$/ =~ req_url) && represented.try(:id).present?
+      if (/#{klass}$/ =~ req_url) && represented.try(:id).present?
         "#{req_url}/#{represented.id}"
       else
         req_url

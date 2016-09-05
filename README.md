@@ -11,6 +11,7 @@ leveraging cross-platform synergies and probably microsoft edge
  - clone it
  - `bundle` it 
  - `foreman start` it
+ - `rake db:mongoid:create_indexes` it
  - bop it!
 
 ## Testing

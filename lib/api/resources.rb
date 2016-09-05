@@ -5,7 +5,8 @@ module API
     autoload :Brand
     autoload :DayPart
     autoload :Location
-    autoload :OrderType
     autoload :MenuItem
+    autoload :OrderType
+    autoload :PriceLevel
   end
 end
