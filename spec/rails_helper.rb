@@ -47,7 +47,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   require 'database_cleaner'
   DatabaseCleaner.strategy = :truncation
-  config.before { DatabaseCleaner.clean }
+
+  config.before do
+    DatabaseCleaner.clean
+    ::PriceLevel.create_indexes
+  end
 end
 
 def extract_rel(response, rel = nil)
