@@ -2,8 +2,8 @@
 module API
   module Resources
     class PriceLevel < Grape::API
-      include Helpers::Params
-      helpers Helpers::Query
+      include API::Helpers::Params
+      helpers API::Helpers::Query
 
       desc 'Create a Price Level'
       price_level_params

@@ -1,0 +1,13 @@
+{
+  "name": "clippyjs",
+  "homepage": "https://github.com/smore-inc/clippy.js",
+  "_release": "8bfd1f92c7",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "8bfd1f92c725c6bc3a435d538a77c3302b327c08"
+  },
+  "_source": "https://github.com/smore-inc/clippy.js.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/smore-inc/clippy.js.git"
+}
