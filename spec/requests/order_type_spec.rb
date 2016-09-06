@@ -62,4 +62,17 @@ describe 'CRUD Order Type Resource', type: :request do
       ).to eql 10
     end
   end
+
+  context 'delete' do
+    let(:brand) { ::Brand.create(name: 'a858') }
+    let(:location) { Location.create(name: 'contoso ltd', brand: brand) }
+    let!(:order_type) { ::OrderType.create(name: 'test', location: location)}
+
+    it 'nukes the record' do
+      delete "/v1/order_type/#{order_type.id}"
+
+      expect(response.code).to eql '200'
+      expect { OrderType.find(order_type.id) }.to raise_error
+    end
+  end
 end

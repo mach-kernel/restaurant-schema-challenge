@@ -39,6 +39,11 @@ module API
             with: Entities::Brand
           )
         end
+
+        desc 'Delete a brand'
+        delete do
+          remove_or_raise(::Brand, (declared(params)[:id]))
+        end
       end
 
       get do

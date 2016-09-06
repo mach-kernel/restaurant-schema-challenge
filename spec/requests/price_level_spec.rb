@@ -95,4 +95,21 @@ describe 'CRUD Price Level Resource', type: :request do
       ).to eql 10
     end
   end
+
+  context 'delete' do
+    let!(:price_level) do 
+      ::PriceLevel.create(
+        day_part: ::DayPart.create(name: "dp", location: location),
+        order_type: ::OrderType.create(name: "ot", location: location),
+        menu_item: menu_item
+      )
+    end
+
+    it 'nukes the record' do
+      delete "/v1/price_level/#{price_level.id}"
+
+      expect(response.code).to eql '200'
+      expect { PriceLevel.find(price_level.id) }.to raise_error
+    end
+  end
 end

@@ -62,4 +62,17 @@ describe 'CRUD Day Part Resource', type: :request do
       ).to eql 10
     end
   end
+
+  context 'delete' do
+    let(:brand) { ::Brand.create(name: 'a858') }
+    let(:location) { Location.create(name: 'contoso ltd', brand: brand) }
+    let(:day_part) { ::DayPart.create(name: 'test', location: location)}
+
+    it 'nukes the record' do
+      delete "/v1/day_part/#{day_part.id}"
+
+      expect(response.code).to eql '200'
+      expect { DayPart.find(day_part.id) }.to raise_error
+    end
+  end
 end

@@ -85,4 +85,15 @@ describe 'CRUD Menu Item Resource', type: :request do
       end
     end
   end
+
+  context 'delete' do
+    let!(:menu_item) { ::MenuItem.create(name: 'test', brand: brand)}
+
+    it 'nukes the record' do
+      delete "/v1/menu_item/#{menu_item.id}"
+
+      expect(response.code).to eql '200'
+      expect { MenuItem.find(menu_item.id) }.to raise_error
+    end
+  end
 end

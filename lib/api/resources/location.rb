@@ -44,6 +44,11 @@ module API
             with: Entities::Location
           )
         end
+
+        desc 'Delete a location'
+        delete do
+          remove_or_raise(::Location, (declared(params)[:id]))
+        end
       end
 
       get do

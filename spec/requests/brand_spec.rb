@@ -60,4 +60,15 @@ describe 'CRUD Brand Resource', type: :request do
       ).to eql 10
     end
   end
+
+  context 'delete' do
+    let!(:brand) { Brand.create(name: 'contoso ltd') }
+
+    it 'nukes the record' do
+      delete "/v1/brand/#{brand.id}"
+
+      expect(response.code).to eql '200'
+      expect { Brand.find(brand.id) }.to raise_error
+    end
+  end
 end
