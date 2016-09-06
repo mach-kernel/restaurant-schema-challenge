@@ -44,6 +44,11 @@ module API
             with: Entities::DayPart
           )
         end
+
+        desc 'Delete a DayPart'
+        delete do
+          remove_or_raise(::DayPart, (declared(params)[:id]))
+        end
       end
 
       get do

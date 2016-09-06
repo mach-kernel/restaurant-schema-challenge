@@ -8,6 +8,12 @@ module API
         error!("#{klass.name} cannot be found", 404)
       end
 
+      def remove_or_raise(klass, fields = {}, *_args)
+        klass.find(fields).destroy
+      rescue Mongoid::Errors::DocumentNotFound
+        error!("#{klass.name} cannot be found", 404)
+      end
+
       def create_or_raise(klass, fields = {}, *_args)
         klass.create(fields)
       rescue Mongo::Error::OperationFailure, Mongoid::Errors::UnknownAttribute

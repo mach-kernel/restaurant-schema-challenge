@@ -60,6 +60,11 @@ module API
               .retrieve_pricing(declared_params), with: Entities::PriceLevel
           )
         end
+
+        desc 'Delete a MenuItem'
+        delete do
+          remove_or_raise(::MenuItem, (declared(params)[:id]))
+        end
       end
 
       get do

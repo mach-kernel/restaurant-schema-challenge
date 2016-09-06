@@ -71,4 +71,16 @@ describe 'CRUD Location Resource', type: :request do
       ).to eql 10
     end
   end
+
+  context 'delete' do
+    let(:brand) { ::Brand.create(name: 'a858') }
+    let!(:location) { Location.create(name: 'contoso ltd', brand: brand) }
+
+    it 'nukes the record' do
+      delete "/v1/location/#{location.id}"
+
+      expect(response.code).to eql '200'
+      expect { Location.find(location.id) }.to raise_error
+    end
+  end
 end

@@ -44,6 +44,11 @@ module API
             with: Entities::OrderType
           )
         end
+
+        desc 'Delete a OrderType'
+        delete do
+          remove_or_raise(::OrderType, (declared(params)[:id]))
+        end
       end
 
       get do

@@ -46,6 +46,11 @@ module API
             with: Entities::PriceLevel
           )
         end
+
+        desc 'Delete a PriceLevel'
+        delete do
+          remove_or_raise(::PriceLevel, (declared(params)[:id]))
+        end
       end
 
       get do
