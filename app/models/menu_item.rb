@@ -6,13 +6,10 @@ class MenuItem
   field :name, type: String
 
   belongs_to :brand
+
   has_many :price_levels, dependent: :destroy do
-    def retrieve_pricing(order_type, day_part = nil)
-      query = {
-        order_type: order_type,
-        day_part: day_part
-      }.select! { |_k, v| v.present? }
-      where(query).first
+    def retrieve_pricing(query = {})
+      where(query.compact).first
     end
   end
 end
