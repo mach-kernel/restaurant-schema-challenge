@@ -44,6 +44,22 @@ module API
             with: Entities::MenuItem
           )
         end
+
+        desc 'Get the applicable price'
+        params do
+          requires :order_type_id, type: String, desc: 'Order Type ID'
+          optional :day_part_id, type: String, desc: 'Day Part ID, if present'
+        end
+        get '/price' do
+          declared_params = declared(params)
+          item = find_or_raise(::MenuItem, declared_params.delete('id'))
+
+          present(
+            item
+              .price_levels
+              .retrieve_pricing(declared_params), with: Entities::PriceLevel
+          )
+        end
       end
 
       get do
