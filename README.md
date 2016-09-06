@@ -268,6 +268,37 @@ Each resource supports standard `CRUD` operation (and thereby has an endpoint), 
 }
 ```
 
+#### I want to get the pricing for a menu item given other parameters
+
+##### Request
+`GET /v1/menu_item/:id/price?order_type_id=x&day_part_id=y`
+
+##### Response
+```
+{
+  "name": "Price for McThing, Dinner 4, Sit-In 4",
+  "links": [
+    {
+      "rel": "self",
+      "href": "http:\/\/localhost:3000\/v1\/price_level\/57cee2ebb4ed495608b1d021"
+    },
+    {
+      "rel": "order_type",
+      "href": "http:\/\/localhost:3000\/v1\/order_type\/57cee2ebb4ed495608b1d021"
+    },
+    {
+      "rel": "menu_item",
+      "href": "http:\/\/localhost:3000\/v1\/menu_item\/57cee2ebb4ed495608b1d021"
+    },
+    {
+      "rel": "day_part",
+      "href": "http:\/\/localhost:3000\/v1\/day_part\/57cee2ebb4ed495608b1d021"
+    }
+  ],
+  "amount": "68"
+}
+```
+
 ## Testing
 
 - Run all tests with `rake`
