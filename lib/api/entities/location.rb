@@ -8,6 +8,10 @@ module API
         Entities.format_link(opts, represented, self.class.name)
       end
 
+      link :brand do |opts|
+        Entities.format_link(opts, represented, 'Brand')
+      end
+
       collection :order_types, extend: Entities::OrderType
       collection :day_parts, extend: Entities::DayPart
     end

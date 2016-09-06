@@ -5,6 +5,7 @@ module API
       include Base
 
       collection :locations, extend: Entities::Location
+      collection :menu_items, extend: Entities::MenuItem
     end
   end
 end

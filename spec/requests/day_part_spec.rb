@@ -49,6 +49,11 @@ describe 'CRUD Day Part Resource', type: :request do
       end
     end
 
+    it 'retrieves the day_part by id' do
+      get "/v1/day_part/#{day_parts.first.id}"
+      expect(response.code).to eql '200'
+    end
+
     it 'retrieves all day parts when no ID is provided' do
       get '/v1/day_part/'
       expect(response.code).to eql '200'

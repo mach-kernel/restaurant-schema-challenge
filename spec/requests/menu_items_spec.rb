@@ -48,12 +48,41 @@ describe 'CRUD Menu Item Resource', type: :request do
       end
     end
 
+    it 'retrieves the menu_item by id' do
+      get "/v1/menu_item/#{menu_items.first.id}"
+      expect(response.code).to eql '200'
+    end
+
     it 'retrieves all Menu Items when no ID is provided' do
       get '/v1/menu_item/'
       expect(response.code).to eql '200'
       expect(
         extract_rel(JSON.parse(response.body), 'resources')['href'].count
       ).to eql 10
+    end
+
+    context 'price' do
+      let!(:location1) { ::Location.create(name: 'test1', brand: brand) }
+      let!(:day_part1) { ::DayPart.create(name: 'dp1', location: location1) }
+      let!(:order_type1) { ::OrderType.create(name: 'o1', location: location1) }
+
+      let!(:price) do
+        ::PriceLevel.create(
+          amount: 50,
+          order_type: order_type1,
+          day_part: day_part1,
+          menu_item: menu_items.last
+        )
+      end
+
+      it 'retrieves the correct pricing for the given context' do
+        get(
+          "/v1/menu_item/#{menu_items.last.id}/price",
+          day_part_id: day_part1.id,
+          order_type_id: order_type1.id
+        )
+        expect(JSON.parse(response.body)['amount']).to eql '50'
+      end
     end
   end
 end

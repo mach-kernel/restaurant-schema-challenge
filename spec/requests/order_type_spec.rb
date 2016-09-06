@@ -49,6 +49,11 @@ describe 'CRUD Order Type Resource', type: :request do
       end
     end
 
+    it 'retrieves the order_type by id' do
+      get "/v1/order_type/#{order_types.first.id}"
+      expect(response.code).to eql '200'
+    end
+
     it 'retrieves all order types when no ID is provided' do
       get '/v1/order_type/'
       expect(response.code).to eql '200'

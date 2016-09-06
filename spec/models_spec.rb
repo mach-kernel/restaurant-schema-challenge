@@ -46,7 +46,9 @@ describe 'document relationships' do
       retrieved_pricing = menu_items
                           .last
                           .price_levels
-                          .retrieve_pricing(partial_pricing.order_type)
+                          .retrieve_pricing(
+                            order_type_id: partial_pricing.order_type.id
+                          )
 
       expect(retrieved_pricing).to eql(partial_pricing)
 
@@ -65,8 +67,10 @@ describe 'document relationships' do
       expect(menu_items
               .first
               .price_levels
-              .retrieve_pricing(full_pricing.order_type, full_pricing.day_part))
-        .to eql(full_pricing)
+              .retrieve_pricing(
+                order_type_id: full_pricing.order_type.id,
+                day_part_id: full_pricing.day_part.id
+              )).to eql(full_pricing)
     end
   end
 
