@@ -21,5 +21,7 @@ module SalidoPlatformChallenge
     require 'roar/json/hal'
 
     config.autoload_paths << "#{Rails.root}/lib"
+    config.autoload_paths << "#{Rails.root}/lib/*/**"
+
   end
 end

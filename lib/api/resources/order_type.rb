@@ -2,8 +2,8 @@
 module API
   module Resources
     class OrderType < Grape::API
-      include Helpers::Params
-      helpers Helpers::Query
+      include API::Helpers::Params
+      helpers API::Helpers::Query
 
       desc 'Create an order_type'
       order_type_params
