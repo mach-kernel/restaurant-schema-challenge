@@ -3,6 +3,10 @@ var Brand = React.createClass({
     resource: React.PropTypes.string
   },
 
+  componentWillMount: function() {
+    this.loadBrand(this.props.resource);
+  },
+
   getInitialState: function() {
     return {
       brand: undefined
@@ -10,21 +14,14 @@ var Brand = React.createClass({
   },
 
   loadBrand: function(resource) {
-    var onSuccess = function(data) {
-      this.setState({brand: data});
-    }.bind(this);
-
     $.ajax(resource, {
-      success: onSuccess
+      success: function(data) {
+        this.setState({brand: data});
+      }.bind(this),
+      error: function(err) {
+        this.setState({brand: undefined });
+      }.bind(this)
     });
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    this.loadBrand(nextProps.resource);
-  },
-
-  componentWillMount: function() {
-    this.loadBrand(this.props.resource);
   },
 
   render: function() {
@@ -41,15 +38,18 @@ var Brand = React.createClass({
             <table className="table table-condensed table-responsive table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Location</th>
-                  <th>Actions</th>
+                  <th>API Resource Location</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.brand.links[0].href}</td>
                   <td>
-                    <a href="#" className="btn btn-primary btn-sm">Edit</a>                
+                    <BrandModal
+                      brand={this.state.brand}
+                      notifyParent={this.setResourceDirty}
+                    />               
                   </td>
                 </tr>
               </tbody>
@@ -58,5 +58,9 @@ var Brand = React.createClass({
         </div>
       );
     }
+  },
+
+  setResourceDirty: function() {
+    this.loadBrand(this.props.resource);
   }
 });
