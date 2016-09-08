@@ -1,8 +1,16 @@
 var BrandCollection = React.createClass({
+  componentWillMount: function() {
+    this.loadBrands();
+  },
+
+  componentWillUpdate: function() {
+    this.loadBrands();
+  },
 
   getInitialState: function() {
     return {
-      brands: undefined
+      brands: undefined,
+      brandComponents: undefined
     };
   },
 
@@ -11,7 +19,14 @@ var BrandCollection = React.createClass({
       this.setState({
         brands: $.grep(data.links, function(link) {
           return link.rel == 'resources';
-        })[0].href
+        })[0].href,
+        brandComponents: this.state.brands.map(function(brand) {
+          return <Brand 
+                    key={brand}
+                    resource={brand}
+                    notifyParent={this.setResourceDirty}
+                 />
+          });
       });
     }.bind(this);
 
@@ -20,20 +35,16 @@ var BrandCollection = React.createClass({
     });
   },
 
-  componentWillMount: function() {
-    this.loadBrands();
-  },
-
   render: function() {
     if (this.state.brands === undefined) {
       return(<div></div>);      
     }
     else {
-      var listBrands = this.state.brands.map(function(brand) {
-        return <Brand key={brand} resource={brand} />
-      });
-
-      return(<div>{listBrands}</div>);    
+      return(<div>{this.state.brandComponents}</div>);    
     }
+  },
+
+  setResourceDirty: function() {
+    this.setState({brands: undefined});
   }
 });

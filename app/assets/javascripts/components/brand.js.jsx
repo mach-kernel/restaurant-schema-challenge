@@ -1,6 +1,15 @@
 var Brand = React.createClass({
   propTypes: {
-    resource: React.PropTypes.string
+    resource: React.PropTypes.string,
+    notifyParent: React.PropTypes.func
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.loadBrand(nextProps.resource);
+  },
+
+  componentWillMount: function() {
+    this.loadBrand(this.props.resource);
   },
 
   getInitialState: function() {
@@ -10,21 +19,20 @@ var Brand = React.createClass({
   },
 
   loadBrand: function(resource) {
-    var onSuccess = function(data) {
-      this.setState({brand: data});
+    var onSuccess = function(data, text, xhr) {
+      switch(xhr.status) {
+        case 200:
+          this.setState({brand: data});
+          break;
+        case 404:
+          this.notifyParent();
+          break;          
+      }
     }.bind(this);
 
     $.ajax(resource, {
       success: onSuccess
     });
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    this.loadBrand(nextProps.resource);
-  },
-
-  componentWillMount: function() {
-    this.loadBrand(this.props.resource);
   },
 
   render: function() {
@@ -41,15 +49,18 @@ var Brand = React.createClass({
             <table className="table table-condensed table-responsive table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Location</th>
-                  <th>Actions</th>
+                  <th>API Resource Location</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.brand.links[0].href}</td>
                   <td>
-                    <a href="#" className="btn btn-primary btn-sm">Edit</a>                
+                    <BrandModal
+                      brand={this.state.brand}
+                      notifyParent={this.setResourceDirty}
+                    />               
                   </td>
                 </tr>
               </tbody>
@@ -58,5 +69,9 @@ var Brand = React.createClass({
         </div>
       );
     }
+  },
+
+  setResourceDirty: function() {
+    this.setState({brand: undefined});
   }
 });
