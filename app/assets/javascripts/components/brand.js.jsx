@@ -1,3 +1,5 @@
+var Button = app.ReactBootstrap.Button;
+
 var Brand = React.createClass({
   propTypes: {
     resource: React.PropTypes.string
@@ -38,22 +40,38 @@ var Brand = React.createClass({
             <table className="table table-condensed table-responsive table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>API Resource Location</th>
+                  <th>API Resource</th>
+                  <th>Locations</th>
+                  <th>Menu Items</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.brand.links[0].href}</td>
+                  <td>{this.state.brand.locations.length}</td>
+                  <td>{this.state.brand.menu_items.length}</td>
                   <td>
                     <BrandModal
                       brand={this.state.brand}
                       notifyParent={this.setResourceDirty}
-                    />               
+                    />        
                   </td>
                 </tr>
               </tbody>
             </table>
+            <Button
+              bsStyle="primary"
+              bsSize="sm"
+              href={
+                function() {
+                  brand_id = this.state.brand.links[0].href.split('/').pop();
+                  return app.getUrl(location, 'brand/', 'web') + brand_id + '/locations'
+                }.bind(this)()
+              }
+            >
+              Manage Locations
+            </Button> 
           </div>
         </div>
       );

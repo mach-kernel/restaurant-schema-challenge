@@ -6,4 +6,14 @@ require('jquery-ujs');
 const app = window.app = global.app = {};
 
 app.ReactBootstrap = require('react-bootstrap');
+
+clippy.load('Clippy', function(agent){
+  app.clippyAgent = agent;
+}.bind(app));
+
+app.getUrl = function(location, resource, path) {
+  path = (typeof path === 'undefined') ? '/v1/' : '/' + path + '/';
+  return location.origin + path + resource;
+}
+
 //= require_tree ./components

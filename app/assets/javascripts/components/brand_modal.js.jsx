@@ -21,7 +21,7 @@ var BrandModal = React.createClass({
   create: function() {
     $.ajax({
       method: 'post',
-      url: 'http://localhost:3000/v1/brand', 
+      url: app.apiUrl(location, 'brand'), 
       data: this.state.updatedFields,
       dataType: 'json',
       statusCode: {
@@ -30,6 +30,10 @@ var BrandModal = React.createClass({
                 this.close();
               }.bind(this)
       }});
+  },
+
+  componentWillMount: function() {
+
   },
 
   delete: function() {
@@ -61,7 +65,7 @@ var BrandModal = React.createClass({
           onClick={this.open}
         >
           {
-            this.props.create ? '+' : 'View/Edit'
+            this.props.create ? '+' : 'Edit Properties'
           }
         </Button>
         <Modal show={this.state.showModal} onHide={this.close}>
@@ -72,7 +76,7 @@ var BrandModal = React.createClass({
                   if (this.props.create) {
                     return 'Create a Brand';
                   } else {
-                    return 'View / Edit ' + this.props.brand.name;
+                    return 'Edit Properties: ' + this.props.brand.name;
                   }                  
                 }.bind(this)()
               }
