@@ -43,6 +43,8 @@ module API
         desc 'Delete a brand'
         delete do
           remove_or_raise(::Brand, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

@@ -92,7 +92,8 @@ describe 'CRUD Menu Item Resource', type: :request do
     it 'nukes the record' do
       delete "/v1/menu_item/#{menu_item.id}"
 
-      expect(response.code).to eql '200'
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { MenuItem.find(menu_item.id) }.to raise_error
     end
   end

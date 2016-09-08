@@ -22,6 +22,5 @@ module SalidoPlatformChallenge
 
     config.autoload_paths << "#{Rails.root}/lib"
     config.autoload_paths << "#{Rails.root}/lib/*/**"
-
   end
 end

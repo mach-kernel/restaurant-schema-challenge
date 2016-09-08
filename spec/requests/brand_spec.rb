@@ -67,7 +67,8 @@ describe 'CRUD Brand Resource', type: :request do
     it 'nukes the record' do
       delete "/v1/brand/#{brand.id}"
 
-      expect(response.code).to eql '200'
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { Brand.find(brand.id) }.to raise_error
     end
   end

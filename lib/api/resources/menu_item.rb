@@ -64,6 +64,8 @@ module API
         desc 'Delete a MenuItem'
         delete do
           remove_or_raise(::MenuItem, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

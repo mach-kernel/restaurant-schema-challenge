@@ -71,7 +71,8 @@ describe 'CRUD Order Type Resource', type: :request do
     it 'nukes the record' do
       delete "/v1/order_type/#{order_type.id}"
 
-      expect(response.code).to eql '200'
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { OrderType.find(order_type.id) }.to raise_error
     end
   end

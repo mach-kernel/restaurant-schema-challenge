@@ -48,6 +48,8 @@ module API
         desc 'Delete a OrderType'
         delete do
           remove_or_raise(::OrderType, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

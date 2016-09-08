@@ -50,6 +50,8 @@ module API
         desc 'Delete a PriceLevel'
         delete do
           remove_or_raise(::PriceLevel, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

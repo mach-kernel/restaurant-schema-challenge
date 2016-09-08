@@ -70,8 +70,9 @@ describe 'CRUD Day Part Resource', type: :request do
 
     it 'nukes the record' do
       delete "/v1/day_part/#{day_part.id}"
-
-      expect(response.code).to eql '200'
+      
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { DayPart.find(day_part.id) }.to raise_error
     end
   end

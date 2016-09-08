@@ -1,4 +1,8 @@
+var Button = app.ReactBootstrap.Button;
 var BrandCollection = React.createClass({
+  componentWillMount: function() {
+    this.loadBrands();
+  },
 
   getInitialState: function() {
     return {
@@ -6,12 +10,21 @@ var BrandCollection = React.createClass({
     };
   },
 
+  onBrandCreate: function(new_brand) {
+    new_collection = this.state.brands;
+    new_collection.push(new_brand);
+
+    this.setState({
+      brands: new_collection
+    })
+  },
+
   loadBrands: function() {
     var onSuccess = function(data) {
       this.setState({
         brands: $.grep(data.links, function(link) {
           return link.rel == 'resources';
-        })[0].href
+        })[0].href,
       });
     }.bind(this);
 
@@ -20,20 +33,36 @@ var BrandCollection = React.createClass({
     });
   },
 
-  componentWillMount: function() {
-    this.loadBrands();
-  },
-
   render: function() {
     if (this.state.brands === undefined) {
       return(<div></div>);      
     }
     else {
-      var listBrands = this.state.brands.map(function(brand) {
-        return <Brand key={brand} resource={brand} />
-      });
-
-      return(<div>{listBrands}</div>);    
+      return(
+        <div>
+          <div className="row">
+            <Col smOffset={11} sm={1}>
+              <BrandModal
+                brand={undefined}
+                notifyParent={this.onBrandCreate}
+                create={true}
+              />
+            </Col>
+          </div>
+            <br />
+          {
+            this.state.brands.map(function(brand) {
+              if (typeof brand === 'string') {
+                return <Brand 
+                          key={brand}
+                          resource={brand}
+                          create={false}
+                       />                
+              } else { return brand; }
+            })
+          }
+        </div>
+      );    
     }
   }
 });
