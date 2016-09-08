@@ -62,6 +62,5 @@ gem 'grape-roar', '0.3.0'
 gem 'hashie-forbidden_attributes', '0.1.1'
 
 gem 'database_cleaner', '1.5.3'
-
-gem 'bower-rails', '0.10.0'
 gem 'react-rails', '1.8.2'
+gem 'browserify-rails', '3.1.0'

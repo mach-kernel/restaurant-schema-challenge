@@ -15,5 +15,5 @@
 # Ignore MongoDB data
 /db/data/*
 
-# Ignore bower
-/vendor/assets/bower_components/*
+# Ignore node components
+/node_modules/*
