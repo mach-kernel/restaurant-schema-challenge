@@ -4,12 +4,6 @@ Rails.application.routes.draw do
 
   get '/web', to: 'web#index'
 
-  %w(
-    brand
-    location
-    order_type
-    day_part
-    menu_item
-    price_level
-  ).each { |route| get "/web/#{route}" }
+  get '/web/brand'
+  get '/web/brand/:id/locations', to: 'web#locations'
 end

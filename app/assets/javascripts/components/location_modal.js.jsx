@@ -8,38 +8,37 @@ var Modal = app.ReactBootstrap.Modal;
 var OverlayTrigger = app.ReactBootstrap.OverlayTrigger;
 var Tooltip = app.ReactBootstrap.Tooltip;
 
-var BrandModal = React.createClass({
+var LocationModal = React.createClass({
 
   propTypes: {
-    brand: React.PropTypes.object,
+    location: React.PropTypes.object,
     notifyParent: React.PropTypes.func,
-    create: React.PropTypes.bool
+    create: React.PropTypes.string
   },
 
   close: function() { this.setState({ showModal: false })},
   
   create: function() {
+    request = this.state.updatedFields;
+    request.brand_id = this.props.create;
+
     $.ajax({
       method: 'post',
-      url: app.apiUrl(location, 'brand'), 
+      url: app.getUrl(location, 'location'), 
       data: this.state.updatedFields,
       dataType: 'json',
       statusCode: {
         201: function(data) {
-                this.props.notifyParent(data.links[0].href);
+                this.props.notifyParent(data);
                 this.close();
               }.bind(this)
       }});
   },
 
-  componentWillMount: function() {
-
-  },
-
   delete: function() {
     $.ajax({
       method: 'delete',
-      url: this.props.brand.links[0].href
+      url: this.props.location.links[0].href
     });
 
     this.props.notifyParent();
@@ -65,7 +64,7 @@ var BrandModal = React.createClass({
           onClick={this.open}
         >
           {
-            this.props.create ? '+' : 'Edit Properties'
+            typeof this.props.create === 'string' ? '+' : 'Edit Properties'
           }
         </Button>
         <Modal show={this.state.showModal} onHide={this.close}>
@@ -73,10 +72,10 @@ var BrandModal = React.createClass({
             <Modal.Title>
               {
                 function() {
-                  if (this.props.create) {
-                    return 'Create a Brand';
+                  if (typeof this.props.create === 'string') {
+                    return 'Create a Location';
                   } else {
-                    return 'Edit Properties: ' + this.props.brand.name;
+                    return 'Edit Properties: ' + this.props.location.name;
                   }                  
                 }.bind(this)()
               }
@@ -85,7 +84,7 @@ var BrandModal = React.createClass({
 
           <Form horizontal>
             <Modal.Body>
-              <FormGroup controlId="brandName">
+              <FormGroup controlId="locationName">
                 <Col componentClass={ControlLabel} sm={1}>
                   Name
                 </Col>
@@ -94,10 +93,10 @@ var BrandModal = React.createClass({
                     type="text"
                     placeholder={
                       function() {
-                        if (this.props.create) {
-                          return 'e.g. Super Foods';
+                        if (typeof this.props.create === 'string') {
+                          return 'e.g. SoHo';
                         } else {                      
-                          return this.props.brand.name;
+                          return this.props.location.name;
                         }
                       }.bind(this)()
                     }
@@ -114,14 +113,14 @@ var BrandModal = React.createClass({
               <Button
                 onClick={
                   function() {
-                    return this.props.create ? this.create : this.save;
+                    return typeof this.props.create === 'string' ? this.create : this.save;
                   }.bind(this)()
                 }
                 bsStyle="success"
               >Save</Button>
               {
                 function() {
-                  if (!this.props.create) {
+                  if (!(typeof this.props.create === 'string')) {
                     return(
                       <OverlayTrigger
                         overlay={
@@ -150,7 +149,7 @@ var BrandModal = React.createClass({
   save: function() {
     $.ajax({
       method: 'put',
-      url: this.props.brand.links[0].href,
+      url: this.props.location.links[0].href,
       data: this.state.updatedFields
     });
 
