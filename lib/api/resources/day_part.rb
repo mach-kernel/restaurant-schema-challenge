@@ -48,6 +48,8 @@ module API
         desc 'Delete a DayPart'
         delete do
           remove_or_raise(::DayPart, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

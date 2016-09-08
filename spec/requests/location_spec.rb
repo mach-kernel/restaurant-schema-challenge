@@ -78,8 +78,9 @@ describe 'CRUD Location Resource', type: :request do
 
     it 'nukes the record' do
       delete "/v1/location/#{location.id}"
-
-      expect(response.code).to eql '200'
+      
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { Location.find(location.id) }.to raise_error
     end
   end

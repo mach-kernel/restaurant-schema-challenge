@@ -48,6 +48,8 @@ module API
         desc 'Delete a location'
         delete do
           remove_or_raise(::Location, (declared(params)[:id]))
+          status 204
+          ''
         end
       end
 

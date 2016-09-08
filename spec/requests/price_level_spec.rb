@@ -108,7 +108,8 @@ describe 'CRUD Price Level Resource', type: :request do
     it 'nukes the record' do
       delete "/v1/price_level/#{price_level.id}"
 
-      expect(response.code).to eql '200'
+      expect(response.code).to eql '204'
+      expect(response.body).to be_empty
       expect { PriceLevel.find(price_level.id) }.to raise_error
     end
   end
