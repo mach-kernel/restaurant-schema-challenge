@@ -46,7 +46,6 @@ var LocationCollection = React.createClass({
             <h1 className="title">{this.state.brand.name}</h1>
             <h3>Manage Locations</h3>
           </div>
-          <br />
           <div className="row">
             <div className="container">
               <div className="row">
