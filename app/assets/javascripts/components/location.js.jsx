@@ -37,32 +37,42 @@ var Location = React.createClass({
               <thead>
                 <tr>
                   <th>API Resource</th>
-                  <th>Order Types</th>
                   <th>Day Parts</th>
+                  <th>Order Types</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>{this.state.location.links[0].href}</td>
-                  <td>{this.state.location.order_types.length}</td>
                   <td>{this.state.location.day_parts.length}</td>
+                  <td>{this.state.location.order_types.length}</td>
                   <td>
                     <LocationModal
                       location={this.state.location}
-                      notifyParent={this.setResourceDirty}
+                      notifyParent={this.reloadLocation}
                     />   
                   </td>
                 </tr>
               </tbody>
             </table>
+            <div className="row">
+              <DayPartOrderTypeModal
+                create={this.state.location.links[0].href.split('/').pop()}
+                collection={this.state.location.day_parts}
+                notifyParent={this.reloadLocation}
+                type='day_part'
+              /> 
+              <DayPartOrderTypeModal
+                create={this.state.location.links[0].href.split('/').pop()}
+                collection={this.state.location.order_types}
+                notifyParent={this.reloadLocation}
+                type='order_type'
+              />  
+            </div>
           </div>
         </div>
       );
     }
-  },
-
-  setResourceDirty: function() {
-    this.reloadLocation();
   }
 });

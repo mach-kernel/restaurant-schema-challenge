@@ -46,3 +46,4 @@ exclude_paths:
 - db/
 - spec/
 - vendor/
+- app/assets/javascripts/components

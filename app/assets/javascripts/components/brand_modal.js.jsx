@@ -21,7 +21,7 @@ var BrandModal = React.createClass({
   create: function() {
     $.ajax({
       method: 'post',
-      url: app.apiUrl(location, 'brand'), 
+      url: app.getUrl(location, 'brand'), 
       data: this.state.updatedFields,
       dataType: 'json',
       statusCode: {
