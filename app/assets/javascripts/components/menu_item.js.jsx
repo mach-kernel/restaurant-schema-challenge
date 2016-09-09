@@ -5,10 +5,9 @@ var MenuItem = React.createClass({
     resource: React.PropTypes.object
   },
 
+  // TODO: What the fuck?!
   getInitialState: function() {
-    return {
-      menu_item: this.props.resource
-    };
+    return {};
   },
 
   reloadMenuItem: function() {
@@ -20,6 +19,24 @@ var MenuItem = React.createClass({
         this.setState({menu_item: undefined });
       }.bind(this)
     });
+
+    this.fetchLocations();
+  },
+
+  fetchLocations: function() {
+    resource = (this.state.menu_item === undefined) ? this.props.resource : this.state.menu_item;
+    $.ajax(resource.links[1].href, {
+      success: function(data) {
+        this.setState({
+          menu_item: resource,
+          locations: data.locations
+        })
+      }.bind(this)
+    });
+  },
+
+  componentDidMount: function() {
+    this.fetchLocations();
   },
 
   render: function() {
@@ -54,6 +71,14 @@ var MenuItem = React.createClass({
                 </tr>
               </tbody>
             </table>
+            <div className="row">
+              <PriceLevelModal
+                price_levels={this.state.menu_item.price_levels}
+                locations={this.state.locations}
+                parentId={this.state.menu_item.links[0].href.split('/').pop()}
+                notifyParent={this.reloadMenuItem}
+              />  
+            </div>
           </div>
         </div>
       );
