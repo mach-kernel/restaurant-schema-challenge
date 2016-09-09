@@ -24,5 +24,6 @@ class PriceLevel
   validates :menu_item, presence: true
   validates :order_type, presence: true
 
+  index({ order_type: 1}, unique: true)
   index({ order_type: 1, day_part: -1 }, unique: true)
 end

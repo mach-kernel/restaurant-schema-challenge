@@ -60,18 +60,36 @@ var Brand = React.createClass({
                 </tr>
               </tbody>
             </table>
-            <Button
-              bsStyle="primary"
-              bsSize="sm"
-              href={
-                function() {
-                  brand_id = this.state.brand.links[0].href.split('/').pop();
-                  return app.getUrl(location, 'brand/', 'web') + brand_id + '/locations'
-                }.bind(this)()
-              }
-            >
-              Manage Locations
-            </Button> 
+            <div className="row">
+            <div className="col-xs-2">
+                <Button
+                  bsStyle="primary"
+                  bsSize="sm"
+                  href={
+                    function() {
+                      brand_id = this.state.brand.links[0].href.split('/').pop();
+                      return app.getUrl(location, 'brand/', 'web') + brand_id + '/locations'
+                    }.bind(this)()
+                  }
+                >
+                  Manage Locations
+                </Button>
+              </div> 
+              <div className="col-xs-2">
+                <Button
+                  bsStyle="primary"
+                  bsSize="sm"
+                  href={
+                    function() {
+                      brand_id = this.state.brand.links[0].href.split('/').pop();
+                      return app.getUrl(location, 'brand/', 'web') + brand_id + '/menu_items'
+                    }.bind(this)()
+                  }
+                >
+                  Manage Menu Items
+                </Button> 
+              </div>
+            </div>
           </div>
         </div>
       );
