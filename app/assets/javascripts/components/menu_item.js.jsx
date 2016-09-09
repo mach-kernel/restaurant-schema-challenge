@@ -44,7 +44,7 @@ var MenuItem = React.createClass({
               <tbody>
                 <tr>
                   <td>{this.state.menu_item.links[0].href}</td>
-                  <td></td>
+                  <td>{this.state.menu_item.price_levels.length}</td>
                   <td>
                     <MenuItemModal
                       menu_item={this.state.menu_item}
