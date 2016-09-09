@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   get '/web/brand'
   get '/web/brand/:id/locations', to: 'web#locations'
+  get '/web/brand/:id/menu_items', to: 'web#menu_items'
 end
