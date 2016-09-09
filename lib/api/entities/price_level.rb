@@ -5,6 +5,7 @@ module API
       include Base
 
       property :amount
+      property :location_name
 
       %i(order_type menu_item day_part).each do |sideload|
         link sideload do |opts|

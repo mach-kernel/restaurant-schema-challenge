@@ -68,7 +68,7 @@ var Location = React.createClass({
                 collection={this.state.location.order_types}
                 notifyParent={this.reloadLocation}
                 type='order_type'
-              />  
+              />
             </div>
           </div>
         </div>

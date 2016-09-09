@@ -15,6 +15,10 @@ class PriceLevel
     "Price for #{parts.join(', ')}"
   end
 
+  def location_name
+    order_type.location.name
+  end
+
   field :amount, type: String
 
   belongs_to :menu_item
