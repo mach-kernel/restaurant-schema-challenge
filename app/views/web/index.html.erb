@@ -1,2 +1,28 @@
+<script>
+	clippy.load('Clippy', function(agent){
+	  agent.show();
+	  agent.play('Greeting');
+	  agent.speak(
+	  	'Can you believe this shit? All these VCs don\'t even know'
+	  	+ ' all the real money is in making personal assistants.'
+  	  );
+	});
+</script>
+
 <div class="row">
-<h1 class="title">Build Your Meal</h1></div>
+  <h1 class="title">Build Your Meal</h1>
+</div>
+<br />
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<%= react_component('MealBuilder') %>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+	</div>
+</div>
