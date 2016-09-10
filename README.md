@@ -9,7 +9,7 @@ leveraging cross-platform synergies and probably microsoft edge
 ## Getting Started
 
 ### Requirements
-- node.js runtime with npm, and bower installed globally
+- node.js runtime with npm
 - mongodb
 
 ### Setup
@@ -17,6 +17,8 @@ leveraging cross-platform synergies and probably microsoft edge
 git clone
 bundle
 rake db:mongoid:create_indexes
+rake db:seed
+npm install
 foreman start (might want to background this or use sep. tmux tab)
 rails s
 ```
