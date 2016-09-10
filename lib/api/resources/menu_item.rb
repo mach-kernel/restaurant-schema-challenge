@@ -51,14 +51,21 @@ module API
           optional :day_part_id, type: String, desc: 'Day Part ID, if present'
         end
         get '/price' do
-          declared_params = declared(params)
+          declared_params = declared(params).compact
           item = find_or_raise(::MenuItem, declared_params.delete('id'))
 
-          present(
-            item
-              .price_levels
-              .retrieve_pricing(declared_params), with: Entities::PriceLevel
-          )
+          declared_params[
+            'day_part_id'
+          ] = nil if declared_params['day_part_id'].blank?
+
+          priced = item.price_levels.retrieve_pricing(declared_params)
+
+          if priced.nil?
+            status 404
+            return nil
+          end
+
+          present(priced, with: Entities::PriceLevel)
         end
 
         desc 'Delete a MenuItem'

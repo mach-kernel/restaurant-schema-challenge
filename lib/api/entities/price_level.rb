@@ -9,7 +9,9 @@ module API
 
       %i(order_type menu_item day_part).each do |sideload|
         link sideload do |opts|
-          Entities.format_link(opts, represented, sideload.to_s.classify)
+          Entities.format_link(opts,
+                               represented.send(sideload),
+                               sideload.to_s.classify)
         end
       end
     end

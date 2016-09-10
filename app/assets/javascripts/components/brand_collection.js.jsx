@@ -2,10 +2,6 @@ var Button = app.ReactBootstrap.Button;
 var BrandCollection = React.createClass({
   componentWillMount: function() {
     this.loadBrands();
-    // app.clippyAgent.show();
-    // app.clippyAgent.speak(
-    //   'It looks like you\'re trying to modify a Brand resource!'
-    // );
   },
 
   getInitialState: function() {

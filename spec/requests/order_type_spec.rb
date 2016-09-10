@@ -66,7 +66,7 @@ describe 'CRUD Order Type Resource', type: :request do
   context 'delete' do
     let(:brand) { ::Brand.create(name: 'a858') }
     let(:location) { Location.create(name: 'contoso ltd', brand: brand) }
-    let!(:order_type) { ::OrderType.create(name: 'test', location: location)}
+    let!(:order_type) { ::OrderType.create(name: 'test', location: location) }
 
     it 'nukes the record' do
       delete "/v1/order_type/#{order_type.id}"

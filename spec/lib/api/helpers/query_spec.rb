@@ -41,7 +41,7 @@ describe API::Helpers::Query do
   context '#remove_or_raise' do
     let(:brand) { ::Brand.create(name: 'query test') }
 
-    it 'nukes the record' do 
+    it 'nukes the record' do
       expect(subject.remove_or_raise(::Brand, brand.id)).to_not eql false
       expect { Brand.find(brand.id) }
         .to raise_error Mongoid::Errors::DocumentNotFound

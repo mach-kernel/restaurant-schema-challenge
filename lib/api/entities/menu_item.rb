@@ -7,7 +7,7 @@ module API
       collection :price_levels, extend: Entities::PriceLevel
 
       link :brand do |opts|
-        Entities.format_link(opts, represented, 'Brand')
+        Entities.format_link(opts, represented.brand, 'Brand')
       end
     end
   end

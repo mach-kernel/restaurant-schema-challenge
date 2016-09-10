@@ -9,7 +9,7 @@ module API
       end
 
       link :brand do |opts|
-        Entities.format_link(opts, represented, 'Brand')
+        Entities.format_link(opts, represented.brand, 'Brand')
       end
 
       collection :order_types, extend: Entities::OrderType
