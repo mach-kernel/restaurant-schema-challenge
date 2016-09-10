@@ -87,7 +87,7 @@ describe 'CRUD Menu Item Resource', type: :request do
   end
 
   context 'delete' do
-    let!(:menu_item) { ::MenuItem.create(name: 'test', brand: brand)}
+    let!(:menu_item) { ::MenuItem.create(name: 'test', brand: brand) }
 
     it 'nukes the record' do
       delete "/v1/menu_item/#{menu_item.id}"

@@ -5,7 +5,7 @@ module API
       include Base
 
       link :location do |opts|
-        Entities.format_link(opts, represented, 'Location')
+        Entities.format_link(opts, represented.location, 'Location')
       end
     end
   end

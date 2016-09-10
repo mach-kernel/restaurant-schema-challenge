@@ -29,20 +29,57 @@ end
   ::MenuItem.create(name: item, brand: burger_shot)
 end
 
+mcdonalds.reload
+burger_shot.reload
+
+# Full Pricings
 mcdonalds.locations.each do |loc|
-  ::PriceLevel.create(
-    amount: (0..100).to_a.sample,
-    order_type: loc.order_types.sample,
-    day_part: loc.day_parts.sample,
-    menu_item: mcdonalds.menu_items.sample
-  )
+  mcdonalds.menu_items.each do |mi|
+    loc.order_types.each do |ot|
+      ::PriceLevel.create(
+        amount: (0..100).to_a.sample,
+        order_type: ot,
+        day_part: loc.day_parts.sample,
+        menu_item: mi
+      )
+    end
+  end
 end
 
 burger_shot.locations.each do |loc|
-  ::PriceLevel.create(
-    amount: (0..100).to_a.sample,
-    order_type: loc.order_types.sample,
-    day_part: loc.day_parts.sample,
-    menu_item: burger_shot.menu_items.sample
-  )
+  burger_shot.menu_items.each do |mi|
+    loc.order_types.each do |ot|
+      ::PriceLevel.create(
+        amount: (0..100).to_a.sample,
+        order_type: ot,
+        day_part: loc.day_parts.sample,
+        menu_item: mi
+      )
+    end
+  end
+end
+
+# Base Prices
+mcdonalds.locations.each do |loc|
+  mcdonalds.menu_items.each do |mi|
+    loc.order_types.each do |ot|
+      ::PriceLevel.create(
+        amount: (0..100).to_a.sample,
+        order_type: ot,
+        menu_item: mi
+      )
+    end
+  end
+end
+
+burger_shot.locations.each do |loc|
+  burger_shot.menu_items.each do |mi|
+    loc.order_types.each do |ot|
+      ::PriceLevel.create(
+        amount: (0..100).to_a.sample,
+        order_type: ot,
+        menu_item: mi
+      )
+    end
+  end
 end

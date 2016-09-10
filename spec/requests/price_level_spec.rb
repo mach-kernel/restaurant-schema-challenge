@@ -97,10 +97,10 @@ describe 'CRUD Price Level Resource', type: :request do
   end
 
   context 'delete' do
-    let!(:price_level) do 
+    let!(:price_level) do
       ::PriceLevel.create(
-        day_part: ::DayPart.create(name: "dp", location: location),
-        order_type: ::OrderType.create(name: "ot", location: location),
+        day_part: ::DayPart.create(name: 'dp', location: location),
+        order_type: ::OrderType.create(name: 'ot', location: location),
         menu_item: menu_item
       )
     end
