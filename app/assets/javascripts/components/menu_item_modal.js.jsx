@@ -158,6 +158,6 @@ var MenuItemModal = React.createClass({
   },
 
   updateNameField: function(e) {
-    this.state.updatedFields.name = e.target.value;
+    this.setState({updatedFields: {name: e.target.value}});
   }
 });

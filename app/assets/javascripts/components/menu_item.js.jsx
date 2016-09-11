@@ -5,9 +5,11 @@ var MenuItem = React.createClass({
     resource: React.PropTypes.object
   },
 
-  // TODO: What the fuck?!
   getInitialState: function() {
-    return {};
+    return {
+      menu_item: this.props.resource,
+      locations: undefined
+    };
   },
 
   reloadMenuItem: function() {
@@ -24,23 +26,23 @@ var MenuItem = React.createClass({
   },
 
   fetchLocations: function() {
-    resource = (this.state.menu_item === undefined) ? this.props.resource : this.state.menu_item;
+    resource = this.state.menu_item;
+
     $.ajax(resource.links[1].href, {
       success: function(data) {
         this.setState({
-          menu_item: resource,
           locations: data.locations
         })
       }.bind(this)
     });
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.fetchLocations();
   },
 
   render: function() {
-    if (this.state.menu_item === undefined) {
+    if (this.state.menu_item === undefined || this.state.locations === undefined) {
       return(<div></div>);
     }
     else {

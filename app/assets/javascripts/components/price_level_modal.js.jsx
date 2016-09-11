@@ -34,7 +34,9 @@ var PriceLevelModal = React.createClass({
   close: function() { this.setState({ showModal: false })},
   
   create: function() {
-    day_part_id = (this.state.day_part !== undefined) ? this.state.day_part.split('/').pop() : undefined;
+    day_part_id = (
+      (this.state.day_part === undefined) || (this.state.day_part === null)
+    ) ? null : this.state.day_part.split('/').pop();
 
     request = {
       amount: this.state.amount,
@@ -141,7 +143,7 @@ var PriceLevelModal = React.createClass({
 
     if (this.state.day_part === undefined) {
       if (valid_locations.length > 0) {      
-        this.setState({day_part: valid_locations[0].day_parts[0].links[0].href});
+        this.setState({day_part: null});
       }
     }
 
@@ -192,7 +194,7 @@ var PriceLevelModal = React.createClass({
                     {
                       function() {
                         if (this.state.show_placeholder === true) {
-                          return(<option value="placeholder"></option>);
+                          return(<option key="plholder" value="placeholder"></option>);
                         }
                       }.bind(this)()
                     }
@@ -200,7 +202,7 @@ var PriceLevelModal = React.createClass({
                       this.state.locations.map(function(location) {
                         if (typeof location === 'object') {
                           return(
-                            <option value={location.links[0].href}>{location.name}</option>
+                            <option key={location.links[0].href} value={location.links[0].href}>{location.name}</option>
                           );        
                         }
                       }.bind(this))
@@ -210,7 +212,9 @@ var PriceLevelModal = React.createClass({
                 <td>
                   <FormControl
                     id="amount_field"
-                    type="text"
+                    type="number"
+                    min="0"
+                    step="0.01"
                     placeholder="e.g. 8.99"
                     className="input-sm"
                     onChange={this.updateAmountField}
@@ -228,7 +232,7 @@ var PriceLevelModal = React.createClass({
                       function(order_type) {
                         if (typeof order_type === 'object') {
                           return(
-                            <option value={order_type.links[0].href}>{order_type.name}</option>
+                            <option key={order_type.links[0].href} value={order_type.links[0].href}>{order_type.name}</option>
                           );        
                         }
                       }
@@ -243,12 +247,13 @@ var PriceLevelModal = React.createClass({
                     className="input-sm"
                     onChange={this.updateDayPart}
                   >
+                  <option value={null}>None</option>
                   {
                     this.validDayParts().map(
                       function(day_part) {
                         if (typeof day_part === 'object') {
                           return(
-                            <option value={day_part.links[0].href}>{day_part.name}</option>
+                            <option key={day_part.links[0].href} value={day_part.links[0].href}>{day_part.name}</option>
                           );        
                         }
                       }
