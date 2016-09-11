@@ -25,6 +25,7 @@ class PriceLevel
   belongs_to :day_part
   belongs_to :order_type
 
+  validates :amount, presence: true
   validates :menu_item, presence: true
   validates :order_type, presence: true
 

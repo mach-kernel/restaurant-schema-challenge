@@ -8,6 +8,7 @@ module API
       desc 'Create a Price Level'
       price_level_params
       params do
+        requires :amount, type: Integer, desc: 'Price Level'
         requires :menu_item_id, type: String, desc: 'ID of Menu Item Parent'
         requires :order_type_id, type: String, desc: 'ID of Order Type Parent'
       end

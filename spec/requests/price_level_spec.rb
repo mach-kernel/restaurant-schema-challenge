@@ -70,10 +70,11 @@ describe 'CRUD Price Level Resource', type: :request do
   context 'retrieve' do
     let!(:price_levels) do
       (0..9).to_a.map do |x|
-        ::PriceLevel.create(
+        ::PriceLevel.create!(
           day_part: ::DayPart.create(name: "dp #{x}", location: location),
           order_type: ::OrderType.create(name: "ot #{x}", location: location),
-          menu_item: menu_item
+          menu_item: menu_item,
+          amount: 10
         )
       end
     end
@@ -101,7 +102,8 @@ describe 'CRUD Price Level Resource', type: :request do
       ::PriceLevel.create(
         day_part: ::DayPart.create(name: 'dp', location: location),
         order_type: ::OrderType.create(name: 'ot', location: location),
-        menu_item: menu_item
+        menu_item: menu_item,
+        amount: 10
       )
     end
 
