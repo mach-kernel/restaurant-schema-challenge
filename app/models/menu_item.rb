@@ -9,7 +9,7 @@ class MenuItem
 
   has_many :price_levels, dependent: :destroy do
     def retrieve_pricing(query = {})
-      where(query.compact).first
+      where(query).first
     end
   end
 end
