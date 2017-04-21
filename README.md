@@ -1,5 +1,5 @@
 # restaurant-schema-challenge
-leveraging cross-platform synergies and probably microsoft edge
+leveraging cross-platform synergies, the finest enterprise buzzwords, and probably microsoft edge
 
 
 [![Code Climate](https://codeclimate.com/github/mach-kernel/restaurant-schema-challenge/badges/gpa.svg)](https://codeclimate.com/github/mach-kernel/restaurant-schema-challenge)
@@ -13,7 +13,7 @@ leveraging cross-platform synergies and probably microsoft edge
 - mongodb
 
 ### Setup
-```
+```bash
 git clone
 bundle
 rake db:mongoid:create_indexes
@@ -30,7 +30,7 @@ The resource schemas use [HAL](http://stateless.co/hal_specification.html). As a
 
 For example, to access a location that is associated with a brand, just navigate to its resource URL, or in this case, `/v1/location/57cee2ebb4ed495608b1cfe7`. `self` will be present for each request, to show the user where they are, and for each entity, to allow easy traversal. 
 
-```
+```javascript
 {
   "name": "McDonalds",
   "links": [
@@ -70,7 +70,7 @@ For example, to access a location that is associated with a brand, just navigate
 
 Each resource supports standard `CRUD` operation (and thereby has an endpoint), and has its own entity in `app/entities`. Calling `GET` on a resource without an ID will use a generic `List` entity presenter with each resource present under `links/resources` array. When `GET`-ing a resource with an ID, all child documents will be sideloaded along with their children, into the response body.
 
-**Note on deletions**: If you `DELETE` a parent entity, such as `Location` or `Brand`, you willalso delete its children!
+**Note on deletions**: If you `DELETE` a parent entity, such as `Location` or `Brand`, you will also delete its children!
 
 ### Example Requests
 
@@ -80,7 +80,7 @@ Each resource supports standard `CRUD` operation (and thereby has an endpoint), 
 `GET /v1/brand`
 
 ##### Response
-```
+```javascript
 {
   "links": [
     {
@@ -104,7 +104,7 @@ Each resource supports standard `CRUD` operation (and thereby has an endpoint), 
 `GET /v1/brand/57cee2ebb4ed495608b1cfe5`
 
 ##### Response
-```
+```javascript
 {
   "name": "McDonalds",
   "links": [
@@ -276,7 +276,7 @@ Each resource supports standard `CRUD` operation (and thereby has an endpoint), 
 `GET /v1/menu_item/:id/price?order_type_id=x&day_part_id=y`
 
 ##### Response
-```
+```javascript
 {
   "name": "Price for McThing, Dinner 4, Sit-In 4",
   "links": [
